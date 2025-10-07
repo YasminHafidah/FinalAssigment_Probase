@@ -1,11 +1,15 @@
 <?php
 
+use Illuminate\Http\Request;
+use App\Models\TheoryValidation;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ModulController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TheoryValidationController;
-use App\Http\Controllers\UserController;
-use App\Models\TheoryValidation;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UploadProjectController;
+use App\Http\Controllers\ValidationQuestionController;
 
 Route::get('/', function () {
     return view('login');
@@ -32,15 +36,16 @@ Route::get('/project', [ProjectController::class, 'index']);
 
 Route::get('/project/{project:slug}', [ProjectController::class, 'show']);
 
-Route::get('/validasiProgress', [TheoryValidationController::class, 'index']);
+Route::get('/validasi/{project:slug}', [ValidationQuestionController::class, 'showAll']);
 
 Route::get('/meet', function () {
     return view('meet');
 });
 
-Route::get('/uploadProgress', function () {
-    return view('uploadProject');
-});
+Route::get('/upload/{project:slug}', [UploadProjectController::class, 'create']);
+
+Route::post('/upload/{project:slug}', [UploadProjectController::class, 'store'])->name('upload.user')
+    ->middleware('auth');
 
 Route::get('/validasiProgress', function () {
     return view('validasiProgress');

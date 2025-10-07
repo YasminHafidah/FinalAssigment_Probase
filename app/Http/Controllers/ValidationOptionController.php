@@ -2,25 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\Modul;
+use App\Models\ValidationOption;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use PhpParser\Node\Stmt\Return_;
 
-class ModulController extends Controller
+class ValidationOptionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categories = Category::with('moduls')->get();
-
-        return view('daftarMateri', ['categories' => $categories]);
+        //
     }
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -41,16 +34,15 @@ class ModulController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Modul $materi)
+    public function show(ValidationOption $validationOption)
     {
-
-        return view('materi', ['modul' => $materi]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Modul $modul)
+    public function edit(ValidationOption $validationOption)
     {
         //
     }
@@ -58,7 +50,7 @@ class ModulController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Modul $modul)
+    public function update(Request $request, ValidationOption $validationOption)
     {
         //
     }
@@ -66,7 +58,7 @@ class ModulController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Modul $modul)
+    public function destroy(ValidationOption $validationOption)
     {
         //
     }

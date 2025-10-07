@@ -11,14 +11,9 @@
                     <a href={{ url('/project/' . $project->slug) }}
                         class="rounded-md bg-indigo-600 px-10 py-3 text-lg font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                         {{ $project->title }}</a>
-                    <a href={{ url('/uploadProgress')}}
+                    {{-- <a href={{ url('/uploadProgress')}}
                         class="rounded-md bg-indigo-500 px-10 py-1 text-sm font-semibold text-white shadow-xs hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-                        Upload Progress {{ $project->title }}</a>
-                    @if ($project->id!=1)
-                        <a href={{ url('/validasiProgress' .$project->id)}}
-                        class="rounded-md bg-indigo-400 px-10 py-1 text-sm font-semibold text-white shadow-xs hover:bg-indigo-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400">
-                        Validasi {{ $project->title }}</a>
-                    @endif
+                        Upload Progress {{ $project->title }}</a> --}}
                 @endforeach
             @endif
             {{-- <a href="/kelompok" class="rounded-md bg-indigo-300 px-10 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Lihat kamu di kelompok berapa</a>

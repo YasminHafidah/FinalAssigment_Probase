@@ -3,24 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Modul;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use PhpParser\Node\Stmt\Return_;
 
-class ModulController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categories = Category::with('moduls')->get();
-
-        return view('daftarMateri', ['categories' => $categories]);
+        //
     }
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -41,16 +34,15 @@ class ModulController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Modul $materi)
+    public function show(Category $category)
     {
-
-        return view('materi', ['modul' => $materi]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Modul $modul)
+    public function edit(Category $category)
     {
         //
     }
@@ -58,7 +50,7 @@ class ModulController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Modul $modul)
+    public function update(Request $request, Category $category)
     {
         //
     }
@@ -66,7 +58,7 @@ class ModulController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Modul $modul)
+    public function destroy(Category $category)
     {
         //
     }

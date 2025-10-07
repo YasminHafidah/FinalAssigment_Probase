@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\ProjectMaterial;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -16,6 +18,7 @@ class ProjectController extends Controller
 
         return view('daftarProject',['projects'=>$projects]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -40,6 +43,7 @@ class ProjectController extends Controller
     {
         return view('lihatProject',['project' => $project]);
     }
+
 
     /**
      * Show the form for editing the specified resource.

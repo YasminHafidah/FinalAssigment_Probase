@@ -32,4 +32,5 @@ class Modul extends Model
             $modul->slug = Str::slug($modul->title);
         });
     }
+
 }

@@ -54,3 +54,10 @@ Route::get('/validasiProgress', function () {
 Route::post('/register', [UserController::class, 'prosesRegister'])->name('user.register');
 
 Route::post('/', [UserController::class, 'prosesLogin'])->name('user.login');
+
+use App\Http\Controllers\GoogleController;
+
+Route::get('/auth/google/redirect', [GoogleController::class, 'redirectToGoogle'])->name('google.redirect');
+
+Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+

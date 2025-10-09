@@ -32,6 +32,9 @@
     </form>
 
     <p class="mt-10 text-center text-sm/6 text-gray-500">
+        <a href="{{ route('google.redirect') }}" class="font-semibold text-indigo-600 hover:text-indigo-500">Login dengan akun Google</a>
+    </p>
+    <p class="mt-10 text-center text-sm/6 text-gray-500">
         Belum punya akun?
         <a href="/register" class="font-semibold text-indigo-600 hover:text-indigo-500">Registrasi Akun</a>
     </p>

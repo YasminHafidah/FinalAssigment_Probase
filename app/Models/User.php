@@ -25,6 +25,8 @@ class User extends Authenticatable
         'kelas',
         'email',
         'password',
+        'google_id',
+        'google_token'
     ];
 
     /**

@@ -9,40 +9,44 @@ use Symfony\Component\Console\Question\Question;
 
 class ValidationQuestionController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
+    public function __invoke()
+    {
+        return view('validasiProgress');
+    }
     public function index()
     {
-        $validation = ValidationQuestion::all();
-
-        return view('validasiProgress', ['validasi' => $validation]);
+        // $validation = ValidationQuestion::all();
+        // return view('validasiProgress', ['validasi' => $validation]);
     }
 
-    public function validasi(Project $project)
-    {
-        $questions = $project->questions()->get();
-        return view('validasiProgress', [
-            'project' => $project,
-            'questions' => $questions
-        ]);
-    }
+    // public function validasi(Project $project)
+    // {
+    //     $questions = $project->questions()->get();
+    //     return view('validasiProgress', [
+    //         'project' => $project,
+    //         'questions' => $questions
+    //     ]);
+    // }
 
-    public function showAll(Project $project)
-    {
-        $materials = $project->project_materials()->with([
-            'questions' => function ($query) {
-                // Urutkan soal berdasarkan tipe ('multiple' dulu)
-                $query->orderByRaw("FIELD(type, 'multiple', 'essay')");
-            },
-            // Kita tetap perlu eager load options untuk soal-soal tersebut
-            'questions.options'
-        ])->orderBy('urutan')->get();
-        return view('validasiProgress', [
-            'project' => $project,
-            'materials' => $materials,
-        ]);
-    }
+    // public function showAll(Project $project)
+    // {
+    //     $materials = $project->project_materials()->with([
+    //         'questions' => function ($query) {
+    //             // Urutkan soal berdasarkan tipe ('multiple' dulu)
+    //             $query->orderByRaw("FIELD(type, 'multiple', 'essay')");
+    //         },
+    //         // Kita tetap perlu eager load options untuk soal-soal tersebut
+    //         'questions.options'
+    //     ])->orderBy('urutan')->get();
+    //     return view('validasiProgress', [
+    //         'project' => $project,
+    //         'materials' => $materials,
+    //     ]);
+    // }
 
     /**
      * Show the form for creating a new resource.

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -32,5 +33,15 @@ class ValidationQuestion extends Model
     public function options(): HasMany
     {
         return $this->hasMany(ValidationOption::class, 'questionId');
+    }
+
+    public function answers(): HasMany
+    {
+        return $this->hasMany(UserAnswer::class, 'question_id');
+    }
+
+    public function materials():BelongsTo
+    {
+        return $this->belongsTo(ProjectMaterial::class, 'materialID');
     }
 }

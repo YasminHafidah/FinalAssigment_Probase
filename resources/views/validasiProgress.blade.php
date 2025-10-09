@@ -1,4 +1,4 @@
-<x-layoutProject>
+{{-- <x-layoutProject>
     <h1 class="text-4xl  text-blue-950 font-bold">Validasi</h1>
     <h2 class="text-2xl text-blue-950 font-bold mt-5">{{ $project->title }}</h2>
     @forelse ($materials as $material)
@@ -37,17 +37,27 @@
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Tuliskan jawabanmu disini..."></textarea>
                 @endif --}}
-            @empty
+{{-- @empty
             @endforelse
         </div>
     @empty
         <h3>Tidak ada material</h3>
-    @endforelse
+    @endforelse --}}
 
-    {{-- <a href="#"
+{{-- <a href="#"
         class="rounded-md bg-indigo-600 px-2 py-3 text-xl font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ">
         Lanjut
     </a> --}}
 
 
-</x-layoutProject>
+{{-- </x-layoutProject> --}}
+
+@extends('components.layoutQuestions')
+
+@section('content')
+    @livewire('quiz')
+@endsection
+
+@push('scripts')
+    @livewireScripts()
+@endpush

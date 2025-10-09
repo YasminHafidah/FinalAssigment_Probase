@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Notifications\Notifiable;
@@ -60,5 +62,15 @@ class User extends Authenticatable
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function uploads(): HasMany
+    {
+        return $this->hasMany(UploadProject::class, 'user_id');
+    }
+
+    public function answers(): BelongsTo
+    {
+        return $this->belongsTo(ValidationAttemp::class,'user_id');
     }
 }

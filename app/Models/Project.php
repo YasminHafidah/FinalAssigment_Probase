@@ -69,4 +69,19 @@ class Project extends Model
     {
         return $this->hasMany(UploadProject::class, 'projectId');
     }
+
+    public function validation_attemps(): HasMany
+    {
+        return $this->hasMany(ValidationAttemp::class, 'project_id');
+    }
+
+    public function user_answer(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            UserAnswer::class,
+            ValidationAttemp::class,
+            'project_id',
+            'validation_attemp_id'
+        );
+    }
 }

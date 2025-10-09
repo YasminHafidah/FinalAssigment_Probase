@@ -26,6 +26,11 @@ class UploadProject extends Model
         return $this->belongsTo(Project::class, 'projectId');
     }
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     // public static function createUser(array $data): self
     // {
     //     return self::create([

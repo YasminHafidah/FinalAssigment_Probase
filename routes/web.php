@@ -10,6 +10,9 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TheoryValidationController;
 use App\Http\Controllers\UploadProjectController;
 use App\Http\Controllers\ValidationQuestionController;
+use App\Http\Controllers\GoogleController;
+use App\Livewire\Quiz;
+use App\Models\ValidationQuestion;
 
 Route::get('/', function () {
     return view('login');
@@ -36,7 +39,7 @@ Route::get('/project', [ProjectController::class, 'index']);
 
 Route::get('/project/{project:slug}', [ProjectController::class, 'show']);
 
-Route::get('/validasi/{project:slug}', [ValidationQuestionController::class, 'showAll']);
+Route::get('/validasi/{project:slug}', Quiz::class)->middleware('auth');
 
 Route::get('/meet', function () {
     return view('meet');
@@ -55,9 +58,10 @@ Route::post('/register', [UserController::class, 'prosesRegister'])->name('user.
 
 Route::post('/', [UserController::class, 'prosesLogin'])->name('user.login');
 
-use App\Http\Controllers\GoogleController;
-
 Route::get('/auth/google/redirect', [GoogleController::class, 'redirectToGoogle'])->name('google.redirect');
 
 Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
+Route::get('/quiz', Quiz::class);
+
+Route::get('/validasi', ValidationQuestionController::class);

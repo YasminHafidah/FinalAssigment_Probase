@@ -13,7 +13,8 @@ class UserAnswer extends Model
         'validation_attemp_id',
         'question_id',
         'option_choice_id',
-        'essay_answer'
+        'essay_answer',
+        'nilai_essay'
     ];
 
     public function question():BelongsTo{
@@ -22,5 +23,9 @@ class UserAnswer extends Model
 
     public function option():BelongsTo{
         return $this->belongsTo(ValidationOption::class,'option_choice_id');
+    }
+
+    public function attempt():BelongsTo{
+        return $this->belongsTo(ValidationAttemp::class,'validation_attempt_id');
     }
 }

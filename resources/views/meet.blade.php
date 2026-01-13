@@ -1,14 +1,10 @@
 <x-layoutProject>
+    @section('title', 'Meet - ProBase')
     <h1>Meet</h1>
-    @if (session('success'))
-        <div class="alert alert-success" role="alert">
-            {{ session('success') }}
-        </div>
+    @if (Auth::user()->userGroup && Auth::user()->userGroup->group && Auth::user()->userGroup->group->meet)
+        <a href="{{ route('meet') }}" class="btn btn-primary">Masuk Google Meet</a>
+    @else
+        <button class="btn btn-secondary" disabled>Link Meet belum tersedia</button>
     @endif
 
-    @if (session('error'))
-        <div class="alert alert-danger" role="alert">
-            {{ session('error') }}
-        </div>
-    @endif
 </x-layoutProject>

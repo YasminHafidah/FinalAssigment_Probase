@@ -56,7 +56,9 @@ class Project extends Model
             ValidationQuestion::class,
             ProjectMaterial::class,
             'projectId',
-            'materialID'
+            'materialID',
+            'id',
+            'id'
         );
     }
 

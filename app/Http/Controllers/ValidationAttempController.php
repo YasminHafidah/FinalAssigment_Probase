@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ValidationAttemp;
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 
 class ValidationAttempController extends Controller
@@ -12,7 +13,8 @@ class ValidationAttempController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        
     }
 
     /**

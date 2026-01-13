@@ -28,10 +28,14 @@ class GoogleController extends Controller
                 'email' => $googleUser->getEmail(),
                 'username' => explode('@', $googleUser->getEmail())[0],
                 'password' => null,
-                'kelas' => 'xi',
+                'kelas' => null,
                 'google_token' => $googleUser->token,
             ]);
             Auth::login($user);
+            if (empty($user->kelas)) {
+                return redirect()->route('profile.edit')
+                    ->with('warning', 'Login Google berhasil! Harap lengkapi data Kelas Anda.');
+            }
             return redirect('/dashboard');
             // $response = Http::withToken($googleUser->token)
             //     ->throw()

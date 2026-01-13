@@ -1,11 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Erica+One&display=swap');
 @import 'tailwindcss';
+
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    box-shadow: 0 0 0 1000px #E49273 inset !important; 
+    
+    /* Ganti warna teks */
+    -webkit-text-fill-color: #4A5568 !important; 
+    
+    /* Ganti warna kursor */
+    caret-color: #4A5568 !important;
+
+    border: none !important;
+    outline: none !important;
+}
+
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+        /* File: resources/css/app.css atau src/app.css */
+
+    --font-erica: 'Erica One','sans-serif';
+
+    --color-primary: '#0B132B';
+    --color-secondary: '#E49273';
+    --color-button: '#8093F1';
+    --color-background: '#E8F1F2';
 }

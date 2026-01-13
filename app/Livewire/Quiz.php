@@ -11,6 +11,7 @@ use App\Models\ValidationQuestion;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Contracts\Service\Attribute\Required;
 
+
 class Quiz extends Component
 {
 
@@ -23,6 +24,7 @@ class Quiz extends Component
     public $JawabanUser;
     public array $jawaban = [];
     public $attemp_id;
+    public bool $konfirmasiSubmit = false;
 
     public function mount(Project $project)
     {
@@ -97,9 +99,12 @@ class Quiz extends Component
                 ]);
             }
         }
+        // $attemp = ValidationAttemp::find($this->attemp_id);
+        // $attemp->completed_at = now();
+        // $attemp->save();
+
         $attemp = ValidationAttemp::find($this->attemp_id);
-        $attemp->completed_at = now();
-        $attemp->save();
+        $finalScore = $attemp->hitungScorePG();
 
         return redirect('/project')
             ->with('message', 'Validasi berhasil');
@@ -129,13 +134,54 @@ class Quiz extends Component
         }
         if ($indeksPertanyaan >= 0 && $indeksPertanyaan < $this->totalPertanyaan) {
             $this->QuestionIndex = $indeksPertanyaan;
+            $idSoalBaru = $this->idQuestions[$this->QuestionIndex];
+            if (isset($this->jawaban[$idSoalBaru])) {
+                $this->JawabanUser = $this->jawaban[$idSoalBaru];
+            } else {
+                $this->reset('JawabanUser');
+            }
         }
+    }
+
+    public function getAllAnsweredProperty()
+    {
+        return count($this->jawaban) == $this->totalPertanyaan;
+    }
+
+    public function kembaliKeSoal()
+    {
+        $this->status = 'mulai';
+        $currentQuestionId = $this->idQuestions[$this->QuestionIndex];
+
+        if (isset($this->jawaban[$currentQuestionId])) {
+            $this->JawabanUser = $this->jawaban[$currentQuestionId];
+        }
+    }
+
+    /**
+     * Memunculkan modal konfirmasi.
+     */
+    public function askToSubmitFinal()
+    {
+        // Hanya munculkan modal jika semua soal sudah dijawab
+        if ($this->allAnswered) {
+            $this->konfirmasiSubmit = true;
+        }
+    }
+
+    /**
+     * Membatalkan submit dan menutup modal.
+     */
+    public function cancelSubmitFinal()
+    {
+        $this->konfirmasiSubmit = false;
     }
 
     public function render()
     {
         return view('livewire.quiz', [
             'question' => $this->currentQuestion,
+            'allAnswered' => $this->allAnswered,
         ]);
     }
 }

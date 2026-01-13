@@ -28,19 +28,18 @@
                             <span> {{ $project->title }}</span>
                         </a>
                     @else
-                        <div
-                            class="rounded-md bg-gray-200 px-10 py-3 text-lg font-extrabold text-gray-500 shadow-xs flex items-center cursor-not-allowed opacity-60">
+                            <div
+                                onclick="alert('{{ $project->pesan }}')" class= "rounded-md bg-gray-200 px-10 py-3 text-lg font-extrabold text-gray-500 shadow-xs flex items-center cursor-pointer opacity-60">
+                                {{-- Lingkaran SVG (selalu abu-abu) --}}
+                                <svg class="w-8 h-8 flex-shrink-0 mr-4" viewBox="0 0 54 53" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path class="fill-gray-300 stroke-gray-400"
+                                        d="M27.0007 50.25C40.3475 50.25 51.1673 39.6168 51.1673 26.5C51.1673 13.3832 40.3475 2.75 27.0007 2.75C13.6538 2.75 2.83398 13.3832 2.83398 26.5C2.83398 39.6168 13.6538 50.25 27.0007 50.25Z"
+                                        stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
 
-                            {{-- Lingkaran SVG (selalu abu-abu) --}}
-                            <svg class="w-8 h-8 flex-shrink-0 mr-4" viewBox="0 0 54 53" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path class="fill-gray-300 stroke-gray-400"
-                                    d="M27.0007 50.25C40.3475 50.25 51.1673 39.6168 51.1673 26.5C51.1673 13.3832 40.3475 2.75 27.0007 2.75C13.6538 2.75 2.83398 13.3832 2.83398 26.5C2.83398 39.6168 13.6538 50.25 27.0007 50.25Z"
-                                    stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-
-                            <span> {{ $project->title }}</span>
-                        </div>
+                                <span> {{ $project->title }}</span>
+                            </div>
                     @endif
                     {{-- <a href={{ url('/project/' . $project->slug) }}
                         class="rounded-md bg-[#E49273] px-10 py-3 text-lg font-extrabold text-[#0B132B] shadow-xs hover:bg-[#8093F1] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8093F1] flex items-center">

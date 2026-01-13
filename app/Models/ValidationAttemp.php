@@ -36,7 +36,7 @@ class ValidationAttemp extends Model
     public function hitungScorePG()
     {
         $jumlahJawabanBenar = $this->answers()->whereHas('option', function ($query) {
-            $query->where('IsTrue', 1);
+            $query->where('IsTrue', 10);
         })->count();
 
         $this->score = $jumlahJawabanBenar;

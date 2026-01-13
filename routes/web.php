@@ -15,6 +15,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserGroupController;
 use App\Http\Controllers\UploadProjectController;
 use App\Http\Controllers\TheoryValidationController;
+use App\Http\Controllers\UserAnswersController;
 use App\Http\Controllers\ValidationQuestionController;
 
 
@@ -52,6 +53,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('profile.edit');
 
     Route::patch('/profile', [UserController::class, 'updateProfile'])->name('profile.update');
+
+    Route::get('/nilai',[UserAnswersController::class, 'showResult'])->name('nilai');
 
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ValidationAttemp;
-use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
+use App\Models\ValidationAttemp;
+use Illuminate\Support\Facades\Auth;
 
 class ValidationAttempController extends Controller
 {

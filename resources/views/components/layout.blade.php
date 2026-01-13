@@ -2,6 +2,7 @@
     $navLinks = [
         ['name' => 'Dashboard', 'href' => '/dashboard', 'active' => request()->is('dashboard')],
         ['name' => 'Kelompok', 'href' => '/kelompok', 'active' => request()->is('kelompok')],
+        ['name' => 'Nilai', 'href' => '/nilai', 'active' => request()->is('nilai')],
     ];
 @endphp
 

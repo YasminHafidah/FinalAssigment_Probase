@@ -1,7 +1,23 @@
 <x-layoutProject>
     @section('title', 'Project ' . $project->title . '-ProBase')
     <h1 class="text-4xl text-[#0B132B] font-extrabold mb-5">Selamat datang di Checkpoint {{ $project->title }}! </h1>
-    <div class="w-full bg-white rounded-xl shadow-lg p-8 text-[#0B132B] font-semibold">{!! $project->guidelines !!}</div>
+    @if ($project->id == 1)
+        <div
+            class="w-full bg-white rounded-xl shadow-lg p-8 text-[#0B132B] font-semibold mb-4 text-justify border-2 border-dashed">
+            <h2
+                class="text-2xl font-bold uppercase tracking-wider text-[#0B132B] opacity-90 mb-4 flex items-center gap-2 border-b pb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-500" viewBox="0 0 20 20"
+                    fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+                        clip-rule="evenodd" />
+                </svg>
+                Fokus Diskusi Project
+            </h2>
+            {!! $question !!}
+        </div>
+    @endif
+    <div class="w-full bg-[#F9F2ED] rounded-xl shadow-lg p-8 text-[#0B132B] font-semibold">{!! $project->guidelines !!}</div>
     <br>
     <div class="flex flex-col md:flex-row justify-center items-center gap-4 mt-4">
 

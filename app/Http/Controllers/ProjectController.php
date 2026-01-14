@@ -20,7 +20,9 @@ class ProjectController extends Controller
 
     public function index()
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
+
         $projects = Project::orderBy('id', 'asc')->get();
 
         $KKM = 75;
@@ -113,7 +115,9 @@ class ProjectController extends Controller
             $EvaluasiSebelumnya = $sudahEvaluasi;
             $IdSebelumnya = $project->id;
         }
-        return view('daftarProject', ['projects' => $projects]);
+        return view('daftarProject', [
+            'projects' => $projects,
+            ]);
     }
 
 
@@ -138,12 +142,18 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
+
+        $userGroup = $user->kelompok()->with('user')->first();
+        $question = $userGroup ? $userGroup->question : null;
+
         $sudahUpload = UploadProject::where('user_id', $user->id)->where('projectId', $project->id)->exists();
 
         return view('lihatProject', [
             'project' => $project,
             'sudahUpload' => $sudahUpload,
+            'question' => $question
         ]);
     }
 

@@ -13,7 +13,8 @@ class Group extends Model
     protected $fillable = [
         'kelompok',
         'meet',
-        'max'
+        'max',
+        'question'
     ];
 
     public function user():BelongsToMany{

@@ -14,6 +14,8 @@ class UploadProject extends Model
         'path',
         'user_id',
         'projectId',
+        'nilai',
+        'notes'
     ];
 
     /**

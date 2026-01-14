@@ -14,7 +14,8 @@ class UserAnswer extends Model
         'question_id',
         'option_choice_id',
         'essay_answer',
-        'nilai_essay'
+        'nilai_essay',
+        'feedback'
     ];
 
     public function question():BelongsTo{

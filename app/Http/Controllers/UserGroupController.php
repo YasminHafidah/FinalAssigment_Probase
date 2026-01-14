@@ -38,12 +38,14 @@ class UserGroupController extends Controller
         if ($group) {
             $namaGroup = $group->group;
             $anggota = $group->user;
+            $question  = $group->question;
         }
 
         return view('daftarKelompok', [
             'namaKelompok' => $namaGroup,
             'anggota' => $anggota,
             'user' => $user,
+            'question' => $question
         ]);
     }
 

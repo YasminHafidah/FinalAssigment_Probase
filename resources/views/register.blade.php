@@ -4,7 +4,7 @@
 
         <div class="items-center justify-center bg-[#0B132B] p-5 md:flex md:p-12 md:order-last">
             <div class="text-center">
-                <h1 class="font-erica text-8xl font-bold text-[#E8F1F2]">ProBase</h1>
+                <h1 class="font-erica text-6xl md:text-8xl font-bold text-[#E8F1F2]">ProBase</h1>
                 <p class="mx-auto mt-4 max-w-md text-lg font-semibold text-[#E49273]">
                     “E-Learning berbasis fase Database Design untuk pembelajaran Perancangan Basis Data”
                 </p>
@@ -13,7 +13,7 @@
 
         <div class="flex flex-col items-center justify-center p-8 md:p-12 bg-[#E8F1F2] md:order-first">
             <div class="w-full max-w-md">
-                <h1 class="text-6xl font-extrabold text-[#0B132B] text-center">Daftar Akun</h1>
+                <h1 class="text-4xl md:text-6xl font-extrabold text-[#0B132B] text-center">Daftar Akun</h1>
                 <h2 class="text-lg text-[#0B132B] text-center mt-3">Masukkan data-data yang diperlukan untuk
                     membuat akun dengan benar</h2>
                 <div class="mt-5 items-center">

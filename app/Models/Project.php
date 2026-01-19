@@ -26,6 +26,7 @@ class Project extends Model
         'title',
         'slug',
         'guidelines',
+        'rubrik'
     ];
 
     protected static function boot()

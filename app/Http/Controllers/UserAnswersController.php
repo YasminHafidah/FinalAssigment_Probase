@@ -59,13 +59,14 @@ class UserAnswersController extends Controller
                     $nilai_essay = 0;
                 }
                 return [
+                    'has_answers' => $attempt->answers()->count() > 0,
                     'date' => $attempt->completed_at,
                     'nilai_pg' => $nilai_pg,
                     'nilai_essay' => round($nilai_essay, 2),
                     'feedback' => $feedback,
                     'total' => ($nilai_pg + round($nilai_essay, 2)) / 2
                 ];
-            });
+            })->filter(fn($item) => $item['has_answers']);
 
             //cari nilai terbaik dari submitan siswa
             $bestAttempt = $riwayat->sortByDesc('total')->first();

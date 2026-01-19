@@ -2,11 +2,14 @@
 
 namespace App\Filament\Admin\Resources\Projects\Tables;
 
+use App\Models\Project;
+use Filament\Tables\Table;
+use Filament\Actions\Action;
+use Filament\Actions\EditAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Table;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectsTable
 {
@@ -30,6 +33,14 @@ class ProjectsTable
             ])
             ->recordActions([
                 EditAction::make(),
+                Action::make('view_rubrik')
+                    ->label('Lihat Rubrik')
+                    ->icon('heroicon-o-eye')
+                    ->color('info')
+                    ->url(function (Project $record): string {
+                        return Storage::url($record->rubrik);
+                    })
+                    ->openUrlInNewTab(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

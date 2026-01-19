@@ -21,84 +21,119 @@ class GoogleController extends Controller
     {
         try {
             $googleUser = Socialite::driver('google')->user();
-            $user = User::updateOrCreate([
-                'google_id' => $googleUser->getId(),
-            ], [
-                'nama' => $googleUser->getName(),
-                'email' => $googleUser->getEmail(),
-                'username' => explode('@', $googleUser->getEmail())[0],
-                'password' => null,
-                'kelas' => null,
-                'google_token' => $googleUser->token,
-            ]);
+
+            // Cari berdasarkan email agar tidak terjadi duplicate entry
+            $user = User::where('email', $googleUser->getEmail())->first();
+
+            if ($user) {
+                // Jika user sudah ada, update google_id-nya
+                $user->update([
+                    'google_id' => $googleUser->getId(),
+                    'google_token' => $googleUser->token,
+                ]);
+                dd($user->update);
+            } else {
+                // Jika benar-benar user baru, buat akun baru
+                $user = User::create([
+                    'google_id' => $googleUser->getId(),
+                    'nama' => $googleUser->getName(),
+                    'email' => $googleUser->getEmail(),
+                    'username' => explode('@', $googleUser->getEmail())[0],
+                    'password' => null,
+                    'kelas' => null,
+                    'google_token' => $googleUser->token,
+                ]);
+            }
+
             Auth::login($user);
             if (empty($user->kelas)) {
                 return redirect()->route('profile.edit')
                     ->with('warning', 'Login Google berhasil! Harap lengkapi data Kelas Anda.');
             }
             return redirect('/dashboard');
-            // $response = Http::withToken($googleUser->token)
-            //     ->throw()
-            //     ->post('https://meet.googleapis.com/v2/spaces', []);
-
-            // $meetingUri = $response->json('meetingUri');
-
-            // if ($meetingUri) {
-            //     // Jika berhasil, arahkan ke dashboard dengan link meeting
-            //     return redirect('/meet')->with('success', 'Login berhasil! Link Meet: ' . $meetingUri);
-            // } else {
-            //     // Jika gagal membuat meet, tetap login-kan tapi beri pesan error
-            //     return redirect('/meet')->with('error', 'Login berhasil, tapi gagal membuat link Google Meet.');
-            // }
+            // ... sisa kodingan redirect kamu
         } catch (\Exception $e) {
-            // Jika ada error, kembalikan ke halaman login
-            dd($e);
-            // }
-            // $meetingUri = null;
-            // try {
-            //     $response = Http::withToken($googleUser->token)
-            //         ->throw()
-            //         ->post('https://meet.googleapis.com/v2/spaces', []);
-
-            //     $meetingUri = $response->json('meetingUri');
-            // } catch (\Exception $e) {
-            //     // Mencatat error spesifik jika HANYA pembuatan meet yang gagal
-            //     Log::error('Gagal membuat link Google Meet: ' . $e->getMessage());
-            // }
-
-            // // Redirect berdasarkan hasil pembuatan meet
-            // if ($meetingUri) {
-            //     return redirect('/meet')->with('success', 'Login berhasil! Link Meet: ' . $meetingUri);
-            // } else {
-            //     return redirect('/meet')->with('error', 'Login berhasil, tapi gagal membuat link Google Meet.');
-            // }
-            // try {
-            //     $response = Http::withToken($googleUser->token)
-            //         ->throw()
-            //         // INI ADALAH PERBAIKANNYA: Kirim array kosong sebagai body JSON
-            //         ->post('https://meet.googleapis.com/v2/spaces', []);
-
-            //     $meetingUri = $response->json('meetingUri');
-            // } catch (\Exception $e) {
-            //     Log::error('Gagal membuat link Google Meet: ' . $e->getMessage());
-            // }
-            // $meetingUri = null; // Set nilai default
-            // try {
-            //     $response = Http::withToken($googleUser->token)
-            //         ->throw()
-            //         ->post('https://meet.googleapis.com/v2/spaces', []);
-
-            //     $meetingUri = $response->json('meetingUri');
-            // } catch (\Exception $e) {
-            //     Log::error('Gagal membuat link Google Meet: ' . $e->getMessage());
-            // }
-
-            // // --- Bagian 3: Redirect Berdasarkan Hasil ---
-            // if ($meetingUri) {
-            //     return redirect('/meet')->with('success', 'Login berhasil! Link Meet: ' . $meetingUri);
-            // } else {
-            //     return redirect('/meet')->with('error', 'Login berhasil, tapi gagal membuat link Google Meet.');
-            // }
+            return redirect('/login')->with('error', 'Gagal login Google.');
         }
+        // try {
+        //     $googleUser = Socialite::driver('google')->user();
+        //     $user = User::updateOrCreate([
+        //         'google_id' => $googleUser->getId(),
+        //     ], [
+        //         'nama' => $googleUser->getName(),
+        //         'email' => $googleUser->getEmail(),
+        //         'username' => explode('@', $googleUser->getEmail())[0],
+        //         'password' => null,
+        //         'kelas' => null,
+        //         'google_token' => $googleUser->token,
+        //     ]);
+        //     Auth::login($user);
+        //     if (empty($user->kelas)) {
+        //         return redirect()->route('profile.edit')
+        //             ->with('warning', 'Login Google berhasil! Harap lengkapi data Kelas Anda.');
+        //     }
+        //     return redirect('/dashboard');
+        //     // $response = Http::withToken($googleUser->token)
+        //     //     ->throw()
+        //     //     ->post('https://meet.googleapis.com/v2/spaces', []);
+
+        //     // $meetingUri = $response->json('meetingUri');
+
+        //     // if ($meetingUri) {
+        //     //     // Jika berhasil, arahkan ke dashboard dengan link meeting
+        //     //     return redirect('/meet')->with('success', 'Login berhasil! Link Meet: ' . $meetingUri);
+        //     // } else {
+        //     //     // Jika gagal membuat meet, tetap login-kan tapi beri pesan error
+        //     //     return redirect('/meet')->with('error', 'Login berhasil, tapi gagal membuat link Google Meet.');
+        //     // }
+        // } catch (\Exception $e) {
+        // Jika ada error, kembalikan ke halaman login
+        // dd($e);
+        // }
+        // $meetingUri = null;
+        // try {
+        //     $response = Http::withToken($googleUser->token)
+        //         ->throw()
+        //         ->post('https://meet.googleapis.com/v2/spaces', []);
+
+        //     $meetingUri = $response->json('meetingUri');
+        // } catch (\Exception $e) {
+        //     // Mencatat error spesifik jika HANYA pembuatan meet yang gagal
+        //     Log::error('Gagal membuat link Google Meet: ' . $e->getMessage());
+        // }
+
+        // // Redirect berdasarkan hasil pembuatan meet
+        // if ($meetingUri) {
+        //     return redirect('/meet')->with('success', 'Login berhasil! Link Meet: ' . $meetingUri);
+        // } else {
+        //     return redirect('/meet')->with('error', 'Login berhasil, tapi gagal membuat link Google Meet.');
+        // }
+        // try {
+        //     $response = Http::withToken($googleUser->token)
+        //         ->throw()
+        //         // INI ADALAH PERBAIKANNYA: Kirim array kosong sebagai body JSON
+        //         ->post('https://meet.googleapis.com/v2/spaces', []);
+
+        //     $meetingUri = $response->json('meetingUri');
+        // } catch (\Exception $e) {
+        //     Log::error('Gagal membuat link Google Meet: ' . $e->getMessage());
+        // }
+        // $meetingUri = null; // Set nilai default
+        // try {
+        //     $response = Http::withToken($googleUser->token)
+        //         ->throw()
+        //         ->post('https://meet.googleapis.com/v2/spaces', []);
+
+        //     $meetingUri = $response->json('meetingUri');
+        // } catch (\Exception $e) {
+        //     Log::error('Gagal membuat link Google Meet: ' . $e->getMessage());
+        // }
+
+        // // --- Bagian 3: Redirect Berdasarkan Hasil ---
+        // if ($meetingUri) {
+        //     return redirect('/meet')->with('success', 'Login berhasil! Link Meet: ' . $meetingUri);
+        // } else {
+        //     return redirect('/meet')->with('error', 'Login berhasil, tapi gagal membuat link Google Meet.');
+        // }
     }
 }

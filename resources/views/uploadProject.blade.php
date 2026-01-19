@@ -1,24 +1,71 @@
 <x-layoutProject>
-    @section('title', 'Upload '.$project->title.'-ProBase')
-    <h1 class="text-4xl text-[#0B132B] font-extrabold mb-5">Upload Checkpoint {{ $project->title }}</h1>
+    @section('title', 'Upload ' . $project->title . '-ProBase')
+    <h1 class="text-2xl md:text-4xl text-[#0B132B] font-extrabold mb-5">Upload Checkpoint {{ $project->title }}</h1>
+    <div class="mb-6">
+        <a href="{{ url('/project') }}"
+            class="inline-flex items-center gap-2 text-[#0B132B] hover:text-[#8093F1] font-bold transition-colors group">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 group-hover:-translate-x-1 transition-transform"
+                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Kembali ke Daftar Project
+        </a>
+    </div>
     @if ($file)
         <div class="mb-8 p-4 border-2 border-[#0B132B] rounded-lg mt-5">
             <h3 class="text-xl font-extrabold text-[#0B132B]">File yang Sudah Kamu Upload:</h3>
             <br>
-            <div class="mb-8 p-3 border-dashed border-2 rounded-lg mt-5 bg-white">
+            {{-- <div class="mb-8 p-3 border-dashed border-2 rounded-lg mt-5 bg-white">
                 @php
                     $extension = pathinfo($file->path, PATHINFO_EXTENSION);
                 @endphp
-                <div class="font-bold text-lg text-[#0B132B] bg-[#E49273] p-1 flex rounded-xl w-fit">
+                <div
+                    class="font-bold text-sm md:text-lg text-[#0B132B] bg-[#E49273] px-3 py-1 inline-block rounded-xl mb-4 max-w-full truncate">
                     <p>Nama File: {{ $file->nama_file }}</p>
                 </div>
                 @if (in_array(strtolower($extension), ['jpg', 'jpeg', 'png', 'gif', 'webp']))
                     <div class="mt-4">
                         <img src="{{ asset('storage/' . $file->path) }}" alt="{{ $file->nama_file }}"
-                            class="max-w-md rounded-md shadow-md">
+                            class="w-full max-w-sm h-auto rounded-md shadow-md object-contain">
                     </div>
                 @elseif ($extension === 'pdf')
                     <div class="mt-4 border">
+                        <embed src="{{ asset('storage/' . $file->path) }}" type="application/pdf" width="100%"
+                            height="600px">
+                    </div>
+                @endif
+            </div> --}}
+            <div class="mb-8 p-3 border-dashed border-2 rounded-lg mt-5 bg-white">
+                @php
+                    $extension = pathinfo($file->path, PATHINFO_EXTENSION);
+                @endphp
+
+                <div
+                    class="font-bold text-sm md:text-lg text-[#0B132B] bg-[#E49273] px-3 py-1 inline-block rounded-xl mb-4 max-w-full truncate">
+                    <p>Nama File: {{ $file->nama_file }}</p>
+                </div>
+
+                <div class="md:hidden mt-2">
+                    <a href="{{ asset('storage/' . $file->path) }}" target="_blank"
+                        class="inline-flex items-center gap-2 bg-[#8093F1] text-[#0B132B] px-3 py-1 rounded-md font-bold text-sm shadow-sm active:scale-95 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                        Lihat File yang Diunggah
+                    </a>
+                </div>
+
+                @if (in_array(strtolower($extension), ['jpg', 'jpeg', 'png', 'gif', 'webp']))
+                    <div class="mt-4 hidden md:block">
+                        <img src="{{ asset('storage/' . $file->path) }}" alt="{{ $file->nama_file }}"
+                            class="w-full max-w-sm h-auto rounded-md shadow-md object-contain">
+                    </div>
+                @elseif ($extension === 'pdf')
+                    <div class="mt-4 border hidden md:block">
                         <embed src="{{ asset('storage/' . $file->path) }}" type="application/pdf" width="100%"
                             height="600px">
                     </div>
@@ -38,7 +85,7 @@
                 enctype="multipart/form-data" class="mt-2">
                 @csrf
                 <div class="flex">
-                    <div class="rounded-md border-2 px-4 py-2 mr-3 hover:bg-[#0B132B]">
+                    <div class="rounded-md border-2 px-4 py-2 mr-3 hover:bg-[#0B132B] flex flex-col">
                         <input type="file" name="progress" id="progress" class="hidden" required>
                         <label for="progress" class="cursor-pointer text-[#0B132B]  hover:text-white">
                             <span id="file-name" class="text-base">Klik disini untuk memilih file</span>
@@ -67,7 +114,7 @@
                 @csrf
                 <div>
                     <div
-                        class="mb-8 p-20 border-dashed border-2 rounded-lg mt-5 bg-white text-gray-400 hover:text-[#0B132B] flex flex-col text-center items-center">
+                        class="mb-8 p-8 md:p-20 border-dashed border-2 rounded-lg mt-5 bg-white text-gray-400 hover:text-[#0B132B] flex flex-col text-center items-center">
                         <input type="file" name="progress" id="progress" class="hidden" required>
                         <svg xmlns="http://www.w3.org/2000/svg" width="62" height="60" viewBox="0 0 62 60"
                             fill="none" class="items-center">

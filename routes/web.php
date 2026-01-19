@@ -36,6 +36,14 @@ Route::get('/auth/google/redirect', [GoogleController::class, 'redirectToGoogle'
 
 Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
+Route::get('/privacy-policy', function () {
+    return "<h1>Privacy Policy</h1><p>Aplikasi ProBase hanya mengambil data email dan nama untuk kebutuhan login e-learning penelitian skripsi.</p>";
+});
+
+Route::get('/terms', function () {
+    return "<h1>Terms of Service</h1><p>Gunakan aplikasi ini dengan bijak untuk keperluan belajar database design.</p>";
+});
+
 Route::middleware(['auth'])->group(function () {});
 
 // Halaman Inti Website Harus Login
@@ -46,7 +54,7 @@ Route::middleware(['auth'])->group(function () {
         return view('dashboard');
     });
 
-    Route::get('/kelompok', [UserGroupController::class,'showMyGroup']);
+    Route::get('/kelompok', [UserGroupController::class, 'showMyGroup']);
 
     Route::get('/profile', [UserController::class, 'showProfile'])->name('profile');
 
@@ -54,7 +62,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::patch('/profile', [UserController::class, 'updateProfile'])->name('profile.update');
 
-    Route::get('/nilai',[UserAnswersController::class, 'showResult'])->name('nilai');
+    Route::get('/nilai', [UserAnswersController::class, 'showResult'])->name('nilai');
 
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 

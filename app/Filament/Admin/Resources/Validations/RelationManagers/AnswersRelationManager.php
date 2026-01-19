@@ -64,6 +64,11 @@ class AnswersRelationManager extends RelationManager
                 TextColumn::make('option.opsi')->label('Jawaban Pilihan Ganda')->wrap(),
                 IconColumn::make('option.IsTrue')->label('Benar?')->boolean(),
                 TextColumn::make('nilai_essay')->label('Nilai Essay')->wrap(),
+                // Tambahkan di dalam ->columns([...])
+                TextColumn::make('feedback')
+                    ->label('Feedback Essay')
+                    ->wrap()
+                    ->placeholder('Belum ada feedback'),
                 TextColumn::make('created_at')->label('Waktu Jawab'),
             ])
             ->filters([
@@ -99,11 +104,17 @@ class AnswersRelationManager extends RelationManager
                             ->label('Nilai')
                             ->numeric()
                             ->required(),
+
+                        Textarea::make('feedback')
+                            ->label('Masukan / Feedback')
+                            ->placeholder('Tuliskan masukan untuk jawaban esai siswa di sini...')
+                            ->rows(3),
                     ])
 
                     ->action(function (UserAnswer $record, array $data): void {
                         $record->update([
                             'nilai_essay' => $data['nilai_essay'],
+                            'feedback' => $data['feedback']
                         ]);
                     }),
             ])

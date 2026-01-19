@@ -24,6 +24,11 @@ class UploadProjectForm
                     ->searchable()
                     ->preload()
                     ->required(),
+                Select::make('projectId')
+                    ->relationship('project', 'rubrik')
+                    ->searchable()
+                    ->preload()
+                    ->required(),
                 FileUpload::make('path')
                     ->label('Upload File Progress')
                     ->required()
@@ -31,6 +36,8 @@ class UploadProjectForm
                     ->directory('files')
                     ->storeFileNamesIn('nama_file')
                     ->maxSize(10240)
+                    ->columnSpanFull(),
+                Textarea::make('nilai')
                     ->columnSpanFull(),
                 Textarea::make('notes')
                     ->columnSpanFull(),

@@ -32,24 +32,40 @@ class ValidationsTable
 
                 TextColumn::make('score')
                     ->label('Nilai PG')
-                    ->sortable()
-                    ->formatStateUsing(function ($state, ValidationAttemp $record) {
-                        if ($state == null) {
-                            return 'Belum dinilai';
-                        }
-                        $jumlahPertanyaan = $record->project?->pertanyaan_PG ?? 0;
-                        if ($jumlahPertanyaan == 0) {
-                            return $state;
-                        } else {
-                            return $state . '/' . $jumlahPertanyaan;
-                        }
-                    }),
+                    ->sortable(),
 
                 TextColumn::make('answers.nilai_essay')
                     ->label('Nilai Essay')
                     ->sortable()
                     ->placeholder('Belum Dinilai'),
 
+                TextColumn::make('answers_avg_nilai_essay')
+                    ->label('Rata-rata Nilai Essay')
+                    ->avg('answers', 'nilai_essay')
+                    ->sortable()
+                    ->formatStateUsing(function ($state, ValidationAttemp $record) {
+                        $answers = $record->answers()->whereNotNull('essay_answer')->get();
+                        $totalEssay = $answers->count();
+                        $sudahDinilai = $answers->whereNotNull('nilai_essay')->count();
+
+                        if ($totalEssay > 0 && $sudahDinilai < $totalEssay) {
+                            return 'Belum Lengkap';
+                        }
+
+                        return is_null($state) ? 'Belum Dinilai' : number_format($state, 1);
+                    })
+                    ->color(function ($state, ValidationAttemp $record) {
+                        // Kita cek ulang kondisinya di sini
+                        $answers = $record->answers()->whereNotNull('essay_answer')->get();
+                        $totalEssay = $answers->count();
+                        $sudahDinilai = $answers->whereNotNull('nilai_essay')->count();
+
+                        if ($totalEssay > 0 && $sudahDinilai < $totalEssay) {
+                            return 'danger'; // Merah jika belum semua dinilai
+                        }
+
+                        return is_null($state) ? 'gray' : 'success';
+                    }),
                 TextColumn::make('created_at')
                     ->label('Mulai Evaluasi')
                     ->dateTime('d M Y H:i')
@@ -61,6 +77,7 @@ class ValidationsTable
                     ->sortable(),
             ])
             ->filters([])
+            ->defaultSort('created_at', 'desc')
             ->recordActions([])
             ->toolbarActions([
                 BulkActionGroup::make([

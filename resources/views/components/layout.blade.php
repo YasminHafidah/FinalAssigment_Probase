@@ -7,7 +7,7 @@
 @endphp
 
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-gray-100">
+<html lang="en" class="h-full bg-[#E8F1F2]">
 
 <head>
     <meta charset="UTF-8">
@@ -22,7 +22,7 @@
 
 <body class="h-full bg-[#E8F1F2]">
     <div class="min-h-full">
-        <x-Navbar :links="$navLinks" />
+        <x-navbar :links="$navLinks" />
         <main>
             <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                 {{ $slot }}

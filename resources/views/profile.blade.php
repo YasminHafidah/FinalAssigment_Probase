@@ -23,35 +23,35 @@
 
     <div class="mt-5 grid grid-cols-[auto_1fr] gap-y-6 items-center">
         <span
-            class="justify-center bg-[#E49273] rounded-full shrink-0 p-3 text-[#0B132B] font-bold text-lg border-[#0B132B] border-2 shadow-lg">
+            class="justify-center bg-[#E49273] rounded-full shrink-0 p-3 text-[#0B132B] font-bold text-md md:text-lg border-[#0B132B] border-2 shadow-lg">
             Username
         </span>
         <div
-            class="w-full p-3 text-lg text-[#0B132B] placeholder-gray-500 border-[#0B132B] border-2 focus:ring-0 rounded-3xl bg-[#E8F1F2] shadow-lg flex items-center justify-between">
+            class="w-full p-3 text-md md:text-lg text-[#0B132B] placeholder-gray-500 border-[#0B132B] border-2 focus:ring-0 rounded-3xl bg-[#E8F1F2] shadow-lg flex items-center justify-between">
             <span>{{ $user->username }}</span>
         </div>
         <span
-            class="justify-center bg-[#E49273] rounded-full shrink-0 p-3 text-[#0B132B] font-bold text-lg border-[#0B132B] border-2 shadow-lg">
+            class="justify-center bg-[#E49273] rounded-full shrink-0 p-3 text-[#0B132B] font-bold text-md md:text-lg border-[#0B132B] border-2 shadow-lg">
             Nama Lengkap
         </span>
         <div
-            class="w-full p-3 text-lg text-[#0B132B] placeholder-gray-500 border-[#0B132B] border-2 focus:ring-0 rounded-3xl bg-[#E8F1F2] shadow-lg flex items-center justify-between">
+            class="w-full p-3 text-md md:text-lg text-[#0B132B] placeholder-gray-500 border-[#0B132B] border-2 focus:ring-0 rounded-3xl bg-[#E8F1F2] shadow-lg flex items-center justify-between">
             <span>{{ $user->nama }}</span>
         </div>
         <span
-            class="justify-center bg-[#E49273] rounded-full shrink-0 p-3 text-[#0B132B] font-bold text-lg border-[#0B132B] border-2 shadow-lg">
+            class="justify-center bg-[#E49273] rounded-full shrink-0 p-3 text-[#0B132B] font-bold text-md md:text-lg border-[#0B132B] border-2 shadow-lg">
             Kelas
         </span>
         <div
-            class="w-full p-3 text-lg text-[#0B132B] placeholder-gray-500 border-[#0B132B] border-2 focus:ring-0 rounded-3xl bg-[#E8F1F2] shadow-lg flex items-center justify-between">
+            class="w-full p-3 text-md md:text-lg text-[#0B132B] placeholder-gray-500 border-[#0B132B] border-2 focus:ring-0 rounded-3xl bg-[#E8F1F2] shadow-lg flex items-center justify-between">
             <span>{{ $user->kelas }}</span>
         </div>
         <span
-            class="justify-center bg-[#E49273] rounded-full shrink-0 p-3 text-[#0B132B] font-bold text-lg border-[#0B132B] border-2 shadow-lg">
+            class="justify-center bg-[#E49273] rounded-full shrink-0 p-3 text-[#0B132B] font-bold text-md md:text-lg border-[#0B132B] border-2 shadow-lg">
             Email
         </span>
         <div
-            class="w-full p-3 text-lg text-[#0B132B] placeholder-gray-500 border-[#0B132B] border-2 focus:ring-0  rounded-3xl bg-[#E8F1F2] shadow-lg">
+            class="w-full p-3 text-md md:text-lg text-[#0B132B] placeholder-gray-500 border-[#0B132B] border-2 focus:ring-0  rounded-3xl bg-[#E8F1F2] shadow-lg">
             {{ $user->email }}
         </div>
     </div>
@@ -60,7 +60,7 @@
             @csrf
             <button type="submit"
                 class="bg-red-800 hover:bg-red-900 border-2 border-[#0B132B] text-center px-20 py-3 rounded-2xl text-white font-bold">
-                Keluar
+                Log Out
             </button>
         </form>
     </div>
